@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MET - Join the Waiting List</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto text-center py-10">
+        <h1 class="text-4xl font-bold mb-4">Welcome to MET</h1>
+        <p class="text-lg mb-8">Join our waiting list and be the first to experience our service.</p>
+        <form id="waitingListForm" class="max-w-sm mx-auto">
+            <input type="text" id="name" placeholder="Your Name" class="p-2 rounded block w-full mb-4"/>
+            <input type="email" id="email" placeholder="Your Email" class="p-2 rounded block w-full mb-4"/>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+                Join Waiting List
+            </button>
+        </form>
+        <p id="confirmationMessage" class="text-green-500 mt-4 hidden">Thank you for joining!</p>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
+Step 2: JavaScript for Form Handling (main.js)
+
+javascript
+Copy code
+document.getElementById('waitingListForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    
+    // Simple validation
+    if (!name || !email) {
+        alert("Please enter both name and email.");
+        return;
+    }
+
+    // TODO: Integrate with an email service API
+    // Display a confirmation message
+    document.getElementById('confirmationMessage').style.display = 'block';
+});
