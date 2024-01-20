@@ -8,8 +8,33 @@
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto text-center py-10">
+        <!-- Logo -->
+        <img src="path_to_your_image/image.png" alt="MET Logo" class="mx-auto mb-4" style="width: 100px; height: auto;"/>
+        
         <h1 class="text-4xl font-bold mb-4">Welcome to MET</h1>
-        <p class="text-lg mb-8">Join our waiting list and be the first to experience our service.</p>
+        
+        <!-- Company Description -->
+        <div class="mb-8">
+            <p class="text-lg">Our mission is to make your people connections easy.</p>
+            <p class="text-lg">MET is an app that uses NLP and LLM in networking events. It’s a social media app marketed towards networking event and exhibition organisers. It lets the organisers to:</p>
+            <ol class="text-lg text-left mx-auto" style="max-width: 600px;">
+                <li>Track connections made by participants</li>
+                <li>Give a report on the participants</li>
+                <ul>
+                    <li>Summary of topics of discussion</li>
+                    <li>Monitoring Groups</li>
+                </ul>
+                <li>Assists participants</li>
+                <ul>
+                    <li>Instantly notify the name and profile of the person/people you’re talking to</li>
+                    <li>Scribe that's functional in noisy environments</li>
+                    <li>Transcript and Summarisation of your conversation</li>
+                </ul>
+            </ol>
+            <p class="text-lg">Many of us who attend networking events often forget content of the conversation. What if you can look back at your conversations? Current NLPs do not function well in noisy environments. However, MET will be able to differentiate from other NLPs by collating recordings from various devices and utilizing proximity of devices.</p>
+        </div>
+        
+        <!-- Registration Form -->
         <form id="waitingListForm" class="max-w-sm mx-auto">
             <input type="text" id="name" placeholder="Your Name" class="p-2 rounded block w-full mb-4"/>
             <input type="email" id="email" placeholder="Your Email" class="p-2 rounded block w-full mb-4"/>
@@ -18,8 +43,13 @@
             </button>
         </form>
         <p id="confirmationMessage" class="text-green-500 mt-4 hidden">Thank you for joining!</p>
+        <div class="mt-10">
+            <h2 class="text-2xl font-bold mb-2">Contact the MET Team</h2>
+            <p class="text-lg">Seiko Yonemata</p>
+            <p class="text-lg">Phone: 07830856797</p>
+            <p class="text-lg">Email: <a href="mailto:sy946@bath.ac.uk" class="text-blue-500 hover:text-blue-700">sy946@bath.ac.uk</a></p>
+        </div>
     </div>
     <script src="main.js"></script>
 </body>
 </html>
-
