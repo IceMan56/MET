@@ -1,3 +1,5 @@
+// Assuming Firebase has been set up and initialized
+
 document.getElementById('waitingListForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -10,7 +12,14 @@ document.getElementById('waitingListForm').addEventListener('submit', function(e
         return;
     }
 
-    // TODO: Integrate with an email service API
-    // Display a confirmation message
-    document.getElementById('confirmationMessage').style.display = 'block';
+    // Add record to Firebase
+    firebase.firestore().collection('waitingList').add({
+        name: name,
+        email: email
+    }).then(() => {
+        // Display a confirmation message
+        document.getElementById('confirmationMessage').style.display = 'block';
+    }).catch(error => {
+        console.error("Error adding document: ", error);
+    });
 });
