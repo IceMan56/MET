@@ -22,23 +22,4 @@
     <script src="main.js"></script>
 </body>
 </html>
-Step 2: JavaScript for Form Handling (main.js)
 
-javascript
-Copy code
-document.getElementById('waitingListForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    
-    // Simple validation
-    if (!name || !email) {
-        alert("Please enter both name and email.");
-        return;
-    }
-
-    // TODO: Integrate with an email service API
-    // Display a confirmation message
-    document.getElementById('confirmationMessage').style.display = 'block';
-});
