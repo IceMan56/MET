@@ -1,3 +1,24 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyC6b2m3QY5B65NsNYb5vDv_5D8wtY864Xc",
+  authDomain: "metwaitlist.firebaseapp.com",
+  projectId: "metwaitlist",
+  storageBucket: "metwaitlist.appspot.com",
+  messagingSenderId: "281939111874",
+  appId: "1:281939111874:web:7c0648693ef32c2c89b05b",
+  measurementId: "G-T15TTJTPF9"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 // Assuming Firebase has been set up and initialized
 
 document.getElementById('waitingListForm').addEventListener('submit', function(event) {
