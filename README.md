@@ -1,10 +1,10 @@
 MVP 
 
 the prototype should be able to:
-A.	Give a report on the participants  
-  a.	Summary of topics of discussion
-B.	Assists participants
-  a.	Instantly notify the name and profile of the person / people you’re talking to
+1. Give a report on the participants  
+  -Summary of topics of discussion
+2. Assists participants
+  -Instantly notify the name and profile of the person / people you’re talking to
 
 Question:
 app or browser app?
