@@ -70,18 +70,256 @@
         </div>
 
         <!-- Registration Form -->
-        <div class="blue-theme-bg-dark rounded-lg px-6 py-8 inline-block shadow-lg">
-            <form id="waitingListForm" class="max-w-md mx-auto">
-                <input type="text" id="name" placeholder="Your Name" class="p-3 rounded block w-full mb-4 blue-theme-border"/>
-                <input type="email" id="email" placeholder="Your Email" class="p-3 rounded block w-full mb-4 blue-theme-border"/>
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded w-full transition duration-300">
-                    Join Waiting List
-                </button>
-            </form>
-        </div>
+        <!-- Firebase SDK -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
 
-        <p id="confirmationMessage" class="text-green-600 mt-4 hidden">Thank you for joining!</p>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
 
+    <!-- Firebase Initialization -->
+    <script>
+      const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",             // Replace with your Firebase API key
+        authDomain: "YOUR_AUTH_DOMAIN",     // Replace with your Firebase auth domain
+        projectId: "YOUR_PROJECT_ID",       // Replace with your Firebase project ID
+        storageBucket: "YOUR_STORAGE_BUCKET", // Replace with your Firebase storage bucket
+        messagingSenderId: "YOUR_SENDER_ID", // Replace with your Firebase sender ID
+        appId: "YOUR_APP_ID",               // Replace with your Firebase app ID
+        measurementId: "YOUR_MEASUREMENT_ID" // Optional Firebase measurement ID
+      };
+
+      // Initialize Firebase
+      const app = firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore(app);
+    </script>
+
+    <!-- Form Submission Handling -->
+    <script>
+      document.getElementById('waitingListForm').addEventListener('submit', function(event) {
+          event.preventDefault();
+
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          
+          // Simple validation
+          if (!name || !email) {
+              alert("Please enter both name and email.");
+              return;
+          }
+
+          // Add record to Firestore
+          db.collection('waitingList').add({
+              name: name,
+              email: email
+          }).then(() => {
+              // Display a confirmation message
+              document.getElementById('confirmationMessage').style.display = 'block';
+          }).catch(error => {
+              console.error("Error adding document: ", error);
+          });
+      });
+    </script>
+</body>
+</html>
+Please make sure to replace "YOUR_API_KEY", "YOUR_AUTH_DOMAIN", "YOUR_PROJECT_ID", "YOUR_STORAGE_BUCKET", "YOUR_SENDER_ID", and "YOUR_APP_ID" with your actual Firebase project's configuration values. These values can be found in your Firebase project settings.
+
+I've included the scripts to import the Firebase app and Firestore at the bottom of your <body> content before your existing <script> tag (which I assumed contains your main JavaScript). This ensures that the Firebase services are loaded before your script tries to use them.
+
+The <script> block also contains the event listener for your form, where it handles the form submission, validates the inputs, and writes the data to your Firestore database. On successful addition, it shows the confirmation message.
+
+User
+but I also have a main.js file: import { getFirestore } from "firebase/firestore";
+
+// Initialize Firestore
+const db = getFirestore(app);
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyC6b2m3QY5B65NsNYb5vDv_5D8wtY864Xc",
+  authDomain: "metwaitlist.firebaseapp.com",
+  projectId: "metwaitlist",
+  storageBucket: "metwaitlist.appspot.com",
+  messagingSenderId: "281939111874",
+  appId: "1:281939111874:web:7c0648693ef32c2c89b05b",
+  measurementId: "G-T15TTJTPF9"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+// Assuming Firebase has been set up and initialized
+
+document.getElementById('waitingListForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    
+    // Simple validation
+    if (!name || !email) {
+        alert("Please enter both name and email.");
+        return;
+    }
+
+    // Add record to Firebase
+    firebase.firestore().collection('waitingList').add({
+        name: name,
+        email: email
+    }).then(() => {
+        // Display a confirmation message
+        document.getElementById('confirmationMessage').style.display = 'block';
+    }).catch(error => {
+        console.error("Error adding document: ", error);
+    });
+});
+
+// Add record to Firebase Firestore
+addDoc(collection(db, 'waitingList'), {
+    name: name,
+    email: email
+})
+.then(() => {
+    // Display a confirmation message
+    document.getElementById('confirmationMessage').style.display = 'block';
+})
+.catch(error => {
+    console.error("Error adding document: ", error);
+});
+GPT
+The content of your main.js file appears to be a mix of module-based imports and direct SDK calls which would be used in a browser context. When using Firebase with modules, you should be consistent and use the module imports throughout your code.
+
+Here's a revised version of main.js that correctly uses module imports for Firestore. This assumes you are using a build system like Webpack or Parcel that can handle module imports. If you're not using a module bundler, you'll need to stick with the CDN approach as shown in the previous response.
+
+javascript
+Copy code
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyC6b2m3QY5B65NsNYb5vDv_5D8wtY864Xc",
+  authDomain: "metwaitlist.firebaseapp.com",
+  projectId: "metwaitlist",
+  storageBucket: "metwaitlist.appspot.com",
+  messagingSenderId: "281939111874",
+  appId: "1:281939111874:web:7c0648693ef32c2c89b05b",
+  measurementId: "G-T15TTJTPF9"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+// Initialize Firestore
+const db = getFirestore(app);
+
+// Event listener for the form submission
+document.getElementById('waitingListForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+
+  // Simple validation
+  if (!name || !email) {
+    alert("Please enter both name and email.");
+    return;
+  }
+
+  // Add record to Firebase Firestore
+  addDoc(collection(db, 'waitingList'), {
+    name: name,
+    email: email
+  })
+  .then(() => {
+    // Display a confirmation message
+    document.getElementById('confirmationMessage').style.display = 'block';
+  })
+  .catch(error => {
+    console.error("Error adding document: ", error);
+  });
+});
+Make sure to remove any <script> tags from your HTML file that contain Firebase-related code if you are using this main.js file. You would only include the main.js script tag at the end of your body like this:
+
+html
+Copy code
+<script src="main.js"></script>
+If you are not using a module bundler and would prefer to use the CDN approach, you can stick to the previous response where Firebase SDK is included directly in your HTML through CDN links.
+
+User
+so if I`m not using a module bundler, firebase should be initialized in the html file?
+GPT
+Correct, if you're not using a module bundler, you should initialize Firebase directly in your HTML file using CDN links. You can include the Firebase scripts and initialization directly in your <script> tags within the HTML. Here's how you would do it:
+
+Add the Firebase CDN links to the <head> or before the closing </body> tag in your HTML file.
+Initialize Firebase within a <script> tag.
+Add the event listener for your form within the same or another <script> tag.
+Here's how you can modify your existing HTML file:
+
+html
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... existing head elements ... -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
+</head>
+<body class="blue-theme-bg">
+    <!-- ... existing body content ... -->
+
+    <!-- Firebase Initialization and Event Listener -->
+    <script>
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "your-api-key",
+        authDomain: "your-auth-domain",
+        projectId: "your-project-id",
+        storageBucket: "your-storage-bucket",
+        messagingSenderId: "your-messaging-sender-id",
+        appId: "your-app-id",
+        measurementId: "your-measurement-id"
+      };
+
+      // Initialize Firebase
+      const app = firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      // Event listener for the form submission
+      document.getElementById('waitingListForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        
+        // Simple validation
+        if (!name || !email) {
+            alert("Please enter both name and email.");
+            return;
+        }
+
+        // Add record to Firestore
+        db.collection('waitingList').add({
+            name: name,
+            email: email
+        }).then(() => {
+            // Display a confirmation message
+            document.getElementById('confirmationMessage').style.display = 'block';
+        }).catch(error => {
+            console.error("Error adding document: ", error);
+        });
+      });
+    </script>
         <!-- Contact Section -->
         <div class="mt-12">
             <h2 class="text-3xl font-bold mb-3 blue-theme">Contact the MET Team</h2>
@@ -90,5 +328,6 @@
         </div>
     </div>
     <script src="main.js"></script>
+    
 </body>
 </html>
