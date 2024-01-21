@@ -1,3 +1,8 @@
+import { getFirestore } from "firebase/firestore";
+
+// Initialize Firestore
+const db = getFirestore(app);
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -43,4 +48,17 @@ document.getElementById('waitingListForm').addEventListener('submit', function(e
     }).catch(error => {
         console.error("Error adding document: ", error);
     });
+});
+
+// Add record to Firebase Firestore
+addDoc(collection(db, 'waitingList'), {
+    name: name,
+    email: email
+})
+.then(() => {
+    // Display a confirmation message
+    document.getElementById('confirmationMessage').style.display = 'block';
+})
+.catch(error => {
+    console.error("Error adding document: ", error);
 });
