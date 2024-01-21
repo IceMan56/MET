@@ -44,84 +44,25 @@
 <body class="blue-theme-bg">
     <div class="container mx-auto text-center py-10">
         <!-- Logo -->
-        <img src="C:\Users\seiko\OneDrive\Documents\MET\METlogo1.png" alt="MET Logo" class="mx-auto mb-6" style="width: 120px; height: auto;"/>
+        <img src="METlogo1.png" alt="MET Logo" class="mx-auto mb-6" style="width: 120px; height: auto;"/>
 
         <h1 class="text-5xl font-bold mb-6 blue-theme">Welcome to MET</h1>
 
         <!-- Company Description -->
-        <div class="mb-10">
-            <p class="text-xl mb-4 blue-theme-light">Our mission is to make your people connections easy.</p>
-            <p class="text-md mb-4 blue-theme">MET is an app that uses NLP and LLM in networking events, marketed towards networking event and exhibition organisers.</p>
-            <ol class="text-lg text-left mx-auto" style="max-width: 600px;">
-                <li>1. Track connections made by participants</li>
-                <li>2. Give a report on the participants</li>
-                <ul>
-                    <li>     a. Summary of topics of discussion</li>
-                    <li>     b. Monitoring Groups</li>
-                </ul>
-                <li>3. Assists participants</li>
-                <ul>
-                    <li>   a. Instantly notify the name and profile of the person/people you’re talking to</li>
-                    <li>   b. Scribe that's functional in noisy environments</li>
-                    <li>   c. Transcript and Summarisation of your conversation</li>
-                </ul>
-            </ol>
-            <p class="text-lg">Many of us who attend networking events often forget content of the conversation. What if you can look back at your conversations? Current NLPs do not function well in noisy environments. However, MET will be able to differentiate from other NLPs by collating recordings from various devices and utilizing proximity of devices.</p>
-        </div>
+        <!-- ... Company Description ... -->
 
         <!-- Registration Form -->
-        <!-- Firebase SDK -->
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+        <div class="blue-theme-bg-dark rounded-lg px-6 py-8 inline-block shadow-lg">
+            <form id="waitingListForm" class="max-w-md mx-auto">
+                <input type="text" id="name" placeholder="Your Name" class="p-3 rounded block w-full mb-4 blue-theme-border"/>
+                <input type="email" id="email" placeholder="Your Email" class="p-3 rounded block w-full mb-4 blue-theme-border"/>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded w-full transition duration-300">
+                    Join Waiting List
+                </button>
+            </form>
+        </div>
 
-    <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
-
-    <!-- Firebase Initialization -->
-    <script>
-      const firebaseConfig = {
-        apiKey: "AIzaSyC6b2m3QY5B65NsNYb5vDv_5D8wtY864Xc",
-  authDomain: "metwaitlist.firebaseapp.com",
-  projectId: "metwaitlist",
-  storageBucket: "metwaitlist.appspot.com",
-  messagingSenderId: "281939111874",
-  appId: "1:281939111874:web:7c0648693ef32c2c89b05b",
-  measurementId: "G-T15TTJTPF9"
-};
-
-      // Initialize Firebase
-      const app = firebase.initializeApp(firebaseConfig);
-      const db = firebase.firestore(app);
-    </script>
-
-    <!-- Form Submission Handling -->
-    <script>
-      document.getElementById('waitingListForm').addEventListener('submit', function(event) {
-          event.preventDefault();
-
-          const name = document.getElementById('name').value;
-          const email = document.getElementById('email').value;
-          
-          // Simple validation
-          if (!name || !email) {
-              alert("Please enter both name and email.");
-              return;
-          }
-
-          // Add record to Firestore
-          db.collection('waitingList').add({
-              name: name,
-              email: email
-          }).then(() => {
-              // Display a confirmation message
-              document.getElementById('confirmationMessage').style.display = 'block';
-          }).catch(error => {
-              console.error("Error adding document: ", error);
-          });
-      });
-    </script>
-</body>
-</html>
+        <p id="confirmationMessage" class="text-green-600 mt-4 hidden">Thank you for joining!</p>
 
         <!-- Contact Section -->
         <div class="mt-12">
@@ -130,7 +71,48 @@
             <p class="text-lg"><a href="mailto:sy946@bath.ac.uk" class="text-blue-600 hover:text-blue-800">sy946@bath.ac.uk</a></p>
         </div>
     </div>
-    <script src="main.js"></script>
-    
+
+    <!-- Firebase SDK and Form Submission Handling Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6b2m3QY5B65NsNYb5vDv_5D8wtY864Xc",
+            authDomain: "metwaitlist.firebaseapp.com",
+            projectId: "metwaitlist",
+            storageBucket: "metwaitlist.appspot.com",
+            messagingSenderId: "281939111874",
+            appId: "1:281939111874:web:7c0648693ef32c2c89b05b",
+            measurementId: "G-T15TTJTPF9"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore(app);
+
+        document.getElementById('waitingListForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            
+            // Simple validation
+            if (!name || !email) {
+                alert("Please enter both name and email.");
+                return;
+            }
+
+            // Add record to Firestore
+            db.collection('waitingList').add({
+                name: name,
+                email: email
+            }).then(() => {
+                // Display a confirmation message
+                document.getElementById('confirmationMessage').style.display = 'block';
+            }).catch(error => {
+                console.error("Error adding document: ", error);
+            });
+        });
+    </script>
 </body>
 </html>
