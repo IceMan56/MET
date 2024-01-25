@@ -62,10 +62,36 @@
                 padding: 1rem;
             }
         }
+        /* Additional styles for navigation buttons */
+        .nav-button {
+            background-color: #4F46E5; /* Purple shade */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: #4338CA; /* Darker purple */
+        }
+
+        .nav-bar {
+            text-align: center;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
-<body class="blue-theme-bg">
+<body class="gradient-background">
     <div class="container mx-auto text-center py-10">
+        <div class="nav-bar">
+            <button class="nav-button">Home</button>
+            <button class="nav-button">About Us</button>
+            <button class="nav-button">Services</button>
+            <button class="nav-button">Contact</button>
+        </div>
         <!-- Logo -->
         <img src="METlogo1.png" alt="MET Logo" class="mx-auto mb-6" style="width: 120px; height: auto;"/>
 
