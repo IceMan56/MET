@@ -141,7 +141,7 @@
     </div>
 
     <!-- Firebase SDK and Form Submission Handling Scripts -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+<!--     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
     <script>
         const firebaseConfig = {
@@ -181,6 +181,45 @@
                 console.error("Error adding document: ", error);
             });
         });
-    </script>
+    </script> -->
+    <script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyC6b2m3QY5B65NsNYb5vDv_5D8wtY864Xc",
+        authDomain: "metwaitlist.firebaseapp.com",
+        projectId: "metwaitlist",
+        storageBucket: "metwaitlist.appspot.com",
+        messagingSenderId: "281939111874",
+        appId: "1:281939111874:web:7c0648693ef32c2c89b05b",
+        measurementId: "G-T15TTJTPF9"
+    };
+ 
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore(app);
+ 
+    document.getElementById('waitingListForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+ 
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+ 
+        // Simple validation
+        if (!name || !email) {
+            alert("Please enter both name and email.");
+            return;
+        }
+ 
+        // Add record to Firestore
+        db.collection('waitingList').add({
+            name: name,
+            email: email
+        }).then(() => {
+            // Display a confirmation message
+            document.getElementById('confirmationMessage').style.display = 'block';
+        }).catch(error => {
+            console.error("Error adding document: ", error);
+        });
+    });
+</script>
 </body>
 </html>
