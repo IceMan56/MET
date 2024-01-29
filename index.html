@@ -184,13 +184,7 @@
     </script> -->
     <script>
     const firebaseConfig = {
-        apiKey: "AIzaSyC6b2m3QY5B65NsNYb5vDv_5D8wtY864Xc",
-        authDomain: "metwaitlist.firebaseapp.com",
-        projectId: "metwaitlist",
-        storageBucket: "metwaitlist.appspot.com",
-        messagingSenderId: "281939111874",
-        appId: "1:281939111874:web:7c0648693ef32c2c89b05b",
-        measurementId: "G-T15TTJTPF9"
+        // ... your firebase config ...
     };
  
     // Initialize Firebase
@@ -209,14 +203,17 @@
             return;
         }
  
+        console.log(`Submitting form with name: ${name} and email: ${email}`); // Log the form data
+ 
         // Add record to Firestore
         db.collection('waitingList').add({
             name: name,
             email: email
-        }).then(() => {
+        }).then((docRef) => {
+            console.log(`Document written with ID: ${docRef.id}`); // Log the ID of the new document
             // Display a confirmation message
             document.getElementById('confirmationMessage').style.display = 'block';
-        }).catch(error => {
+        }).catch((error) => {
             console.error("Error adding document: ", error);
         });
     });
