@@ -152,10 +152,16 @@
             document.getElementById("submit").addEventListener("click", function(e) {
                 e.preventDefault();
                 set(ref(database, 'users/' + document.getElementById("name").value), {
-                    name: document.getElementById("name").value,
-                    email: document.getElementById("email").value,
-                    organisation_name: document.getElementById("organisation_name").value
-                });
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            organisation_name: document.getElementById("organisation_name").value
+        }).then(() => {
+            // Hide the form and display the confirmation message
+            document.getElementById("waitingListForm").style.display = 'none';
+            document.getElementById("confirmationMessage").style.display = 'block';
+        }).catch(error => {
+            console.error("Error writing document: ", error);
+        });
                 // alert("Thank you for joining!");
             });
         </script>
